@@ -1,10 +1,4 @@
-﻿/*
-*   Chess pieces 3 ver 3
-*   With classes, factory and enum
-*   DKY 25.04.2021 
-*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Chess4
