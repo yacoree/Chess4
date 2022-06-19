@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Chess4
+namespace ChessWPF
 {
     public abstract class Piece
     {

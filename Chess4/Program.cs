@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Chess4
+namespace ChessWPF
 {
     class Program
     {

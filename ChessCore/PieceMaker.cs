@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Chess4
+namespace ChessWPF
 {
     public enum ChessPieces
     {
@@ -64,24 +64,12 @@ namespace Chess4
                 default:
                     throw new Exception("Unknown piece code");
             }
-
             return piece;
         }
 
         static public Piece Make(string pieceCode, int x, int y)
         {
             return Make(ChessPiecesCode[pieceCode], x, y);
-        }
-
-        static public Piece Make(string pieceCode, string position)
-        {
-            return Make(ChessPiecesCode[pieceCode], position);
-        }
-
-        static public Piece Make(ChessPieces pieceCode, string position)
-        {
-            (int x, int y) = Piece.Parse(position);
-            return Make(pieceCode, x, y);
         }
     }
 }
