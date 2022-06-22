@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChessWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="530" Width="875">
+        Title="MainWindow" Height="546" Width="875">
     <Window.Resources>
         <Style x:Key="BlackField">
             <Setter Property="ItemsControl.FontFamily" Value="Arial" />
@@ -18,9 +18,10 @@
             <Setter Property="ItemsControl.Background" Value="White" />
             <Setter Property="ItemsControl.Foreground" Value="Black" />
             <EventSetter Event="Button.Click" Handler="Button_Click" />
+            
         </Style>
     </Window.Resources>
-    <Grid Margin="0,0,0,35">
+    <Grid Margin="0,0,0,-1">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="60"/>
@@ -30,7 +31,7 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60"/>
@@ -110,8 +111,12 @@
         <Button Style="{StaticResource WhiteField}" Grid.Row="7" Grid.Column="3"/>
         <Button Style="{StaticResource WhiteField}" Grid.Row="7" Grid.Column="5"/>
         <Button Style="{StaticResource WhiteField}" Grid.Row="7" Grid.Column="7"/>
-        <ComboBox x:Name="cbPieces" Width="120" Grid.Column="8" Margin="64,0,-124,30" SelectionChanged="cbPieces_SelectionChanged">
+        <ComboBox x:Name="cbPieces" Grid.Column="8" Margin="64,0,-124,30" SelectionChanged="cbPieces_SelectionChanged">
             <ComboBoxItem x:Name="King" Content="King" Height="25" Width="120"/>
+            <ComboBoxItem x:Name="Queen" Content="Queen" Height="25" Width="120"/>
+            <ComboBoxItem x:Name="Rook" Content="Rook" Height="25" Width="120"/>
+            <ComboBoxItem x:Name="Bishop" Content="Bishop" Height="25" Width="120"/>
+            <ComboBoxItem x:Name="Knight" Content="Knight" Height="25" Width="120"/>
         </ComboBox>
 
     </Grid>

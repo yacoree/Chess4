@@ -25,15 +25,6 @@ namespace ChessWPF
             }
             return false;
         }
-
-        public static (int, int) Parse(string position)
-        {
-            if (!Regex.IsMatch(position, "[A-H][1-8]"))
-            {
-                throw new Exception("Invalid position");
-            }
-            return (position[0] - 'A', position[1] - '1');
-        }
     }
 
     public class King : Piece

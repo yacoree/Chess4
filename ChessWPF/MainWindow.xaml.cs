@@ -24,7 +24,10 @@ namespace ChessWPF
         {
             InitializeComponent();
         }
-        List<string> chess = new List<string>();
+        Piece figure;
+        Button btnMove;
+        string chess;
+        bool currentChess;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -32,9 +35,36 @@ namespace ChessWPF
                 Button btnClicked = (Button)sender;
                 int row = Grid.GetRow(btnClicked);
                 int col = Grid.GetColumn(btnClicked);
-                Piece f = PieceMaker.Make(chess[0], row, col);
-                btnClicked.Content = "King";
-                chess.Clear();
+                
+                if (btnClicked.Content == null & currentChess)
+                {
+                    if (figure.TestMove(row, col))
+                    {
+                        figure.Move(row, col);
+                        btnMove.Content = null;
+                        btnClicked.Content = chess;
+                    }
+                    else
+                    {
+                        throw new Exception("Invalid position");
+                    }
+                    currentChess = false;
+                    return;
+                }
+
+                if (btnClicked.Content != null)
+                {
+                    currentChess = true;
+                    btnMove = (Button)sender;
+                    return;
+                }
+
+                if (btnClicked.Content == null)
+                {
+                    figure = PieceMaker.Make(chess, row, col);
+                    btnClicked.Content = chess;
+                    return;
+                }
             }
             catch 
             { }
@@ -46,8 +76,16 @@ namespace ChessWPF
             ComboBoxItem selectedItem = (ComboBoxItem)cbTemp.SelectedItem;
             switch (selectedItem.Content)
             {
-                case "King": chess.Add("King");
-                break;
+                case "King": chess = "King";
+                    break;
+                case "Queen": chess = "Queen";
+                    break;
+                case "Rook": chess = "Rook";
+                    break;
+                case "Bishop": chess = "Bishop";
+                    break;
+                case "Knight": chess = "Knight";
+                    break;
             }
         }
     }
