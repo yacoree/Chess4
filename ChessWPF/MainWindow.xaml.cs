@@ -44,6 +44,7 @@ namespace ChessWPF
                         figure.Move(row, col);
                         btnClicked.Tag = figure;
                         bntFirstPosition.Content = null;
+                        bntFirstPosition.Tag = null;
                         btnClicked.Content = chess;
                         chess = null;
                     }
@@ -61,7 +62,6 @@ namespace ChessWPF
                     currentChess = true;
                     bntFirstPosition = (Button)sender;
                     figure = btnClicked.Tag as Piece;
-                    btnClicked.Tag = null;
                     chess = bntFirstPosition.Content.ToString();
                     return;
                 }
@@ -95,6 +95,13 @@ namespace ChessWPF
                 case "Knight": chess = "Knight";
                     break;
             }
+        }
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow newWindow = new MainWindow();
+            Application.Current.MainWindow = newWindow;
+            newWindow.Show();
+            this.Close();
         }
     }
 }

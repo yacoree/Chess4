@@ -118,6 +118,6 @@
             <ComboBoxItem x:Name="Bishop" Content="Bishop" Height="25" Width="120"/>
             <ComboBoxItem x:Name="Knight" Content="Knight" Height="25" Width="120"/>
         </ComboBox>
-
+        <Button Grid.Column="8" Name="btnClear" Content="Clear" Margin="64,13,-124,22" Grid.Row="7"  Width="120" Height="25" Click="btnClear_Click"/>
     </Grid>
 </Window>
