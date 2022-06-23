@@ -25,9 +25,10 @@ namespace ChessWPF
             InitializeComponent();
         }
         Piece figure;
-        Button btnMove;
         string chess;
         bool currentChess;
+        Button bntFirstPosition;
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -36,14 +37,17 @@ namespace ChessWPF
                 int row = Grid.GetRow(btnClicked);
                 int col = Grid.GetColumn(btnClicked);
                 
-                if (btnClicked.Content == null & currentChess)
+                if ((btnClicked.Content == null & currentChess))
                 {
                     if (figure.TestMove(row, col))
                     {
                         figure.Move(row, col);
-                        btnMove.Content = null;
+                        btnClicked.Tag = figure;
+                        bntFirstPosition.Content = null;
                         btnClicked.Content = chess;
+                        chess = null;
                     }
+
                     else
                     {
                         throw new Exception("Invalid position");
@@ -55,13 +59,17 @@ namespace ChessWPF
                 if (btnClicked.Content != null)
                 {
                     currentChess = true;
-                    btnMove = (Button)sender;
+                    bntFirstPosition = (Button)sender;
+                    figure = btnClicked.Tag as Piece;
+                    btnClicked.Tag = null;
+                    chess = bntFirstPosition.Content.ToString();
                     return;
                 }
 
                 if (btnClicked.Content == null)
                 {
                     figure = PieceMaker.Make(chess, row, col);
+                    btnClicked.Tag = figure;
                     btnClicked.Content = chess;
                     return;
                 }

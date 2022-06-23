@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChessWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="546" Width="875">
+        Title="MainWindow" Height="533" Width="723" ResizeMode="NoResize" WindowStyle="ToolWindow">
     <Window.Resources>
         <Style x:Key="BlackField">
             <Setter Property="ItemsControl.FontFamily" Value="Arial" />
@@ -18,7 +18,7 @@
             <Setter Property="ItemsControl.Background" Value="White" />
             <Setter Property="ItemsControl.Foreground" Value="Black" />
             <EventSetter Event="Button.Click" Handler="Button_Click" />
-            
+
         </Style>
     </Window.Resources>
     <Grid Margin="0,0,0,-1">
