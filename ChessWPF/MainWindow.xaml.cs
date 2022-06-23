@@ -37,7 +37,7 @@ namespace ChessWPF
                 int row = Grid.GetRow(btnClicked);
                 int col = Grid.GetColumn(btnClicked);
                 
-                if ((btnClicked.Content == null & currentChess))
+                if ((btnClicked.Content == null & currentChess) || (btnClicked.Content != null & btnClicked.Tag != null & currentChess))
                 {
                     if (figure.TestMove(row, col))
                     {
