@@ -27,7 +27,7 @@ namespace ChessWPF
         Piece figure;
         string chess;
         bool currentChess;
-        Button bntFirstPosition;
+        Button btnFirstPosition;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -36,46 +36,65 @@ namespace ChessWPF
                 Button btnClicked = (Button)sender;
                 int row = Grid.GetRow(btnClicked);
                 int col = Grid.GetColumn(btnClicked);
-                
-                if ((btnClicked.Content == null & currentChess) || (btnClicked.Content != null & btnClicked.Tag != null & currentChess))
-                {
-                    if (figure.TestMove(row, col))
-                    {
-                        figure.Move(row, col);
-                        btnClicked.Tag = figure;
-                        bntFirstPosition.Content = null;
-                        bntFirstPosition.Tag = null;
-                        btnClicked.Content = chess;
-                        chess = null;
-                    }
 
-                    else
-                    {
-                        throw new Exception("Invalid position");
-                    }
-                    currentChess = false;
+                if ((btnClicked.Content == null || 
+                    (btnClicked.Content != null & btnClicked.Tag != null & btnClicked != btnFirstPosition)) & currentChess)
+                {
+                    ChessMovement(btnClicked, row, col);
                     return;
                 }
 
-                if (btnClicked.Content != null)
+                if (btnClicked.Content != null )
                 {
-                    currentChess = true;
-                    bntFirstPosition = (Button)sender;
-                    figure = btnClicked.Tag as Piece;
-                    chess = bntFirstPosition.Content.ToString();
+                    ChessPreparation(sender, btnClicked, row, col);
                     return;
                 }
 
                 if (btnClicked.Content == null)
                 {
-                    figure = PieceMaker.Make(chess, row, col);
-                    btnClicked.Tag = figure;
-                    btnClicked.Content = chess;
+                    ChessMake(btnClicked, row, col);
                     return;
                 }
             }
             catch 
             { }
+        }
+
+        //Создание шахматной фигуры на доске
+        public void ChessMake(Button btnClicked, int row, int col)
+        {
+            figure = PieceMaker.Make(chess, row, col);
+            btnClicked.Tag = figure;
+            btnClicked.Content = chess;
+        }
+
+        //Подготовка шахматной фигуру к ходу
+        public void ChessPreparation(object sender, Button btnClicked, int row, int col)
+        {
+            currentChess = true;
+            btnFirstPosition = (Button)sender;
+            figure = btnClicked.Tag as Piece;
+            chess = btnFirstPosition.Content.ToString();
+        }
+        
+        //Ход шахматной фигуры в зависимости от правильности хода
+        public void ChessMovement(Button btnClicked, int row, int col)
+        {
+            if (figure.TestMove(row, col))
+            {
+                figure.Move(row, col);
+                btnClicked.Tag = figure;
+                btnFirstPosition.Content = null;
+                btnFirstPosition.Tag = null;
+                btnClicked.Content = chess;
+                chess = null;
+                currentChess = false;
+            }
+
+            else
+            {
+                currentChess = false;
+            }
         }
 
         private void cbPieces_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -98,6 +117,7 @@ namespace ChessWPF
         }
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
+
             MainWindow newWindow = new MainWindow();
             Application.Current.MainWindow = newWindow;
             newWindow.Show();
